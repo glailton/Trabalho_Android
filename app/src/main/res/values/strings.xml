@@ -7,4 +7,5 @@
     <string name="text_welcome">Escolha uma opção para executar uma Intent!</string>
     <string name="text_hint_edText">Digite uma URL válida!</string>
     <string name="btn_browser">Browser</string>
+    <string name="btn_camera">Camera</string>
 </resources>

@@ -13,6 +13,7 @@
         android:textSize="17dp"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -35,4 +36,26 @@
             android:inputType="textUri"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/linearLayout1"
+        android:layout_alignParentLeft="true">
+
+
+        <Button
+            android:id="@+id/btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_camera"/>
+
+        <ImageView
+            android:id="@+id/image_view_camera"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:src="@android:drawable/ic_menu_camera"/>
+    </LinearLayout>
 </RelativeLayout>

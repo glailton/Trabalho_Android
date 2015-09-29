@@ -1,30 +1,46 @@
 package br.com.fa7.especializacao.trabalhoandroid;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import br.com.fa7.especializacao.model.Photo;
+import br.com.fa7.especializacao.util.Util;
+
+public class MainActivity extends Activity implements View.OnClickListener {
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private Photo photo;
+
+
 
     private EditText editTextBrowser;
+    private ImageView imageViewPhoto;
     private Button btnBrowser;
+    private Button btnCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        photo = new Photo();
+
         editTextBrowser = (EditText) findViewById(R.id.edit_text_browser);
+        imageViewPhoto = (ImageView) findViewById(R.id.image_view_camera);
         btnBrowser = (Button) findViewById(R.id.btn_browser);
+        btnCamera = (Button) findViewById(R.id.btn_camera);
 
         btnBrowser.setOnClickListener(this);
+        btnCamera.setOnClickListener(this);
     }
 
     @Override
@@ -50,6 +66,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case REQUEST_IMAGE_CAPTURE:
+                if (data != null){
+                    Bundle bundle = data.getExtras();
+                    if(bundle != null){
+                        Bitmap bitmap = (Bitmap) bundle.get("data");
+                        imageViewPhoto.setImageBitmap(bitmap);
+                        photo.setPhoto(Util.convertBitmapToByteArray(bitmap, 70));
+                    }
+                }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_browser:
@@ -63,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 editTextBrowser.setText("");
+                break;
+            case R.id.btn_camera:
+                Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
                 break;
         }
     }
