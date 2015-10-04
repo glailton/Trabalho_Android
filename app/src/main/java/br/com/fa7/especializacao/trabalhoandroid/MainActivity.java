@@ -23,9 +23,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
     private EditText editTextBrowser;
+    private EditText editTextCall;
     private ImageView imageViewPhoto;
     private Button btnBrowser;
     private Button btnCamera;
+    private Button btnCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +37,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         photo = new Photo();
 
         editTextBrowser = (EditText) findViewById(R.id.edit_text_browser);
+        editTextCall = (EditText) findViewById(R.id.edit_text_call);
         imageViewPhoto = (ImageView) findViewById(R.id.image_view_camera);
         btnBrowser = (Button) findViewById(R.id.btn_browser);
         btnCamera = (Button) findViewById(R.id.btn_camera);
+        btnCall = (Button) findViewById(R.id.btn_call);
 
         btnBrowser.setOnClickListener(this);
         btnCamera.setOnClickListener(this);
+        btnCall.setOnClickListener(this);
     }
 
     @Override
@@ -88,18 +93,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btn_browser:
                 String address = editTextBrowser.getText().toString();
                 if(address.equals("")){
-                    address = "http://www.google.com";
-                }else{
-                    address = "http://".concat(address);
+                    address = "www.google.com";
                 }
-                Uri uri = Uri.parse(address);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                Uri uri = Uri.parse("http://" + address);
+                Intent intentBrowser = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intentBrowser);
                 editTextBrowser.setText("");
                 break;
             case R.id.btn_camera:
-                Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
+                Intent intentCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intentCamera, REQUEST_IMAGE_CAPTURE);
+                break;
+            case R.id.btn_call:
+
+                String number = editTextCall.getText().toString();
+                if(number.equals("")){
+                    number = "190";
+                }
+                Intent intentCall = new Intent(Intent.ACTION_CALL);
+                Uri uriCall = Uri.parse("tel:" + number);
+                intentCall.setData(uriCall);
+                startActivity(intentCall);
+                editTextCall.setText("");
                 break;
         }
     }

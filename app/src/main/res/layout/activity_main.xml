@@ -32,7 +32,7 @@
             android:id="@+id/edit_text_browser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/text_hint_edText"
+            android:hint="@string/text_hint_edTextBrowser"
             android:inputType="textUri"/>
     </LinearLayout>
 
@@ -47,6 +47,30 @@
 
 
         <Button
+            android:id="@+id/btn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_call"/>
+
+        <EditText
+            android:id="@+id/edit_text_call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_hint_edTextCall"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/linearLayout2"
+        android:layout_alignParentLeft="true">
+
+
+        <Button
             android:id="@+id/btn_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +78,7 @@
 
         <ImageView
             android:id="@+id/image_view_camera"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
             android:src="@android:drawable/ic_menu_camera"/>
     </LinearLayout>
